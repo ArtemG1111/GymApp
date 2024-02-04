@@ -1,0 +1,13 @@
+﻿
+
+namespace GymApp.DataAccess.Data.Models
+{
+    public class Section
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<User> Users { get; set; }
+        public Subscription Subscription { get; set; }
+        public int SubscriptionId { get; set; }
+    }
+}
