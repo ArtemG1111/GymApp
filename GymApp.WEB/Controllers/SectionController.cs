@@ -1,6 +1,16 @@
-﻿namespace GymApp.WEB.Controllers
+﻿using GymApp.BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace GymApp.WEB.Controllers
 {
-    public class SectionController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class SectionController : ControllerBase
     {
+        private readonly ISectionService _sectionService;
+        public SectionController(ISectionService sectionService)
+        {
+            _sectionService = sectionService;
+        }
     }
 }

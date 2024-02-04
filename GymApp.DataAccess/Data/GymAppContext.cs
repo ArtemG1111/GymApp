@@ -7,7 +7,7 @@ namespace GymApp.DataAccess.Data
 {
     public class GymAppContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Client> Users { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<FinancialOperation> FinancialOperations { get; set; }

@@ -2,7 +2,7 @@
 
 namespace GymApp.BusinessLogic.Interfaces
 {
-    public interface IUserService
+    public interface IClientService
     {
     }
 }
