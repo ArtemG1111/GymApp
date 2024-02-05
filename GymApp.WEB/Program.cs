@@ -16,10 +16,6 @@ builder.Services.AddTransient<IClientRepository, ClientRepository>()
     .AddTransient<ISectionService, SectionService>()
     .AddTransient<ISubscriptionRepository, SubscriptionRepository>()
     .AddTransient<ISubscriptionService, SubsctiptionService>()
-    .AddTransient<ClientController>()
-    .AddTransient<FinancialOperationController>()
-    .AddTransient<SectionController>()
-    .AddTransient<SubscriptionController>()
     .AddDbContext<GymAppContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
