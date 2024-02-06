@@ -23,16 +23,19 @@ namespace GymApp.WEB.Controllers
             _clientService.AddClient(_mapper.Map<Client>(client));
             return Ok("Client added");
         }
+        [HttpGet]
         public IActionResult GetClients()
         {
             _clientService.GetClients();
             return Ok("Clients received");
         }
+        [HttpPut]
         public IActionResult UpdateClient(ClientViewModel client)
         {
             _clientService.UpdateClient(_mapper.Map<Client>(client));
             return Ok("Client was update");
         }
+        [HttpDelete]
         public IActionResult DeleteClient(int id)
         {
             _clientService.DeleteClient(id);

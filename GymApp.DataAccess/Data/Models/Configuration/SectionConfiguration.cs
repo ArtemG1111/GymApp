@@ -10,8 +10,7 @@ namespace GymApp.DataAccess.Data.Models.Configuration
         public void Configure(EntityTypeBuilder<Section> builder)
         {
             builder.HasOne(s => s.Subscription)
-                .WithMany(s => s.Sections)
-                .HasForeignKey(f => f.SubscriptionId);
+                .WithMany(s => s.Sections);
         }
     }
 }

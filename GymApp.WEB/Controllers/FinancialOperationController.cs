@@ -12,5 +12,11 @@ namespace GymApp.WEB.Controllers
         {
             _financialOperationService = financialOperationService;
         }
+        [HttpGet]
+        public IActionResult GetOperations()
+        {
+            _financialOperationService.GetOperations();
+            return Ok();
+        }
     }
 }

@@ -10,8 +10,7 @@ namespace GymApp.DataAccess.Data.Models.Configuration
         public void Configure(EntityTypeBuilder<FinancialOperation> builder)
         {
             builder.HasOne(s => s.Client)
-                .WithMany(f => f.FinOperations)
-                .HasForeignKey(c => c.ClientId);
+                .WithMany(f => f.FinOperations);      
         }
     }
 }

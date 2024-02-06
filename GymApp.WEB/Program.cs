@@ -3,8 +3,9 @@ using GymApp.BusinessLogic.Services;
 using GymApp.DataAccess.Data;
 using GymApp.DataAccess.Interfaces;
 using GymApp.DataAccess.Repository;
-using GymApp.WEB.Controllers;
 using Microsoft.EntityFrameworkCore;
+using GymApp.WEB.Common.Mapping;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DeffaultConnection");
@@ -20,6 +21,8 @@ builder.Services.AddTransient<IClientRepository, ClientRepository>()
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(ClientMappingProfile));
+
 
 var app = builder.Build();
 

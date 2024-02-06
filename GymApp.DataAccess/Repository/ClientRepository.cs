@@ -1,5 +1,4 @@
 ﻿
-
 using GymApp.DataAccess.Data;
 using GymApp.DataAccess.Data.Models;
 using GymApp.DataAccess.Interfaces;
@@ -15,12 +14,12 @@ namespace GymApp.DataAccess.Repository
         }
         public void AddClient(Client client)
         {
-            _dbContext.Add(client);
+            _dbContext.Clients.Add(client);
             _dbContext.SaveChanges();
         }
         public List<Client> GetClients()
         {
-            return _dbContext.Users.ToList();
+            return _dbContext.Clients.ToList();
         }
         public void UpdateClient(Client client)
         {
@@ -29,7 +28,12 @@ namespace GymApp.DataAccess.Repository
         }
         public void DeleteClient(int id)
         {
-            _dbContext.Remove(id);
+            Client? client = _dbContext.Clients.Find(id);
+            if (client == null)
+            {
+                throw new Exception($"Client with id {id} not found");
+            }
+            _dbContext.Remove(client);
             _dbContext.SaveChanges();
         }
     }

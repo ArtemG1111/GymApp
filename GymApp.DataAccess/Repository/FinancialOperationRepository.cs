@@ -1,6 +1,7 @@
 ﻿
 
 using GymApp.DataAccess.Data;
+using GymApp.DataAccess.Data.Models;
 using GymApp.DataAccess.Interfaces;
 
 namespace GymApp.DataAccess.Repository
@@ -11,6 +12,10 @@ namespace GymApp.DataAccess.Repository
         public FinancialOperationRepository(GymAppContext dbContext)
         {
             _dbContext = dbContext;
+        }
+        public List<FinancialOperation> GetOperations()
+        {
+            return _dbContext.FinancialOperations.ToList();
         }
     }
 }
