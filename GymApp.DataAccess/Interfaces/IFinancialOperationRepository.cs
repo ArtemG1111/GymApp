@@ -6,6 +6,7 @@ namespace GymApp.DataAccess.Interfaces
 {
     public interface IFinancialOperationRepository
     {
-        List<FinancialOperation> GetOperations();
+        void AddFunds(int amount);
+        List<FinancialOperation> GetFinOperations();
     }
 }

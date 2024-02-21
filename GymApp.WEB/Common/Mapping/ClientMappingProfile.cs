@@ -8,7 +8,8 @@ namespace GymApp.WEB.Common.Mapping
     {
         public ClientMappingProfile()
         {
-            CreateMap<Client, ClientViewModel>().ReverseMap();
+            CreateMap<Client, RegisterClientRequest>().ReverseMap();
+            CreateMap<Client, LogInClientRequest>().ReverseMap();
         }
     }
 }

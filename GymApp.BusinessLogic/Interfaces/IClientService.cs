@@ -6,9 +6,11 @@ namespace GymApp.BusinessLogic.Interfaces
 {
     public interface IClientService
     {
-        void AddClient(Client client);
+        void Registration(Client client);
+        Client? LogIn(Client client);
         List<Client> GetClients();
         void UpdateClient(Client client);
         void DeleteClient(int id);
+        
     }
 }

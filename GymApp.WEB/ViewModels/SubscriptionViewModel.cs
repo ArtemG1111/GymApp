@@ -7,6 +7,6 @@
         public string Description { get; set; }
         public int Price { get; set; }
         public List<SectionViewModel> Sections { get; set; }
-        public List<ClientViewModel> Clients { get; set; }
+        public List<RegisterClientRequest> Clients { get; set; }
     }
 }

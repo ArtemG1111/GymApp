@@ -13,9 +13,13 @@ namespace GymApp.BusinessLogic.Services
         {
             _financialOperationRepository = financialOperationRepository;
         }
-        public List<FinancialOperation> GetOperations()
+        public List<FinancialOperation> GetFinOperations()
         {
-            return _financialOperationRepository.GetOperations();
+            return _financialOperationRepository.GetFinOperations();
+        }
+        public void AddFunds(int amount)
+        {
+            _financialOperationRepository.AddFunds(amount);
         }
     }
 }

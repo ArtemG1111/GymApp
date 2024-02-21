@@ -12,10 +12,16 @@ namespace GymApp.DataAccess.Repository
         {
             _dbContext = dbContext;
         }
-        public void AddClient(Client client)
+        public void Registration(Client client)
         {
             _dbContext.Clients.Add(client);
             _dbContext.SaveChanges();
+        }
+        public Client LogIn(Client client)
+        {
+            return _dbContext.Clients.FirstOrDefault(s => s.UserName == client.UserName && s.PasswordHash
+            == client.PasswordHash);
+
         }
         public List<Client> GetClients()
         {

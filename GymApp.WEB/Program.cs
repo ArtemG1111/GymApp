@@ -6,6 +6,8 @@ using GymApp.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 using GymApp.WEB.Common.Mapping;
 using AutoMapper;
+using GymApp.DataAccess.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DeffaultConnection");
@@ -22,12 +24,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(ClientMappingProfile));
-
+builder.Services.AddIdentity<Client, IdentityRole>(opts =>
+{
+    opts.Password.RequireNonAlphanumeric = false;
+    opts.Password.RequireLowercase = false;
+    opts.Password.RequireUppercase = false;
+    opts.Password.RequireDigit = false;
+    opts.Password.RequiredLength = 3;
+})
+    .AddEntityFrameworkStores<GymAppContext>();
 
 var app = builder.Build();
 
 app.UseDeveloperExceptionPage();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 if (app.Environment.IsDevelopment())
 {

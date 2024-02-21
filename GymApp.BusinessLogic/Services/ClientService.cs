@@ -13,9 +13,13 @@ namespace GymApp.BusinessLogic.Services
         {
             _clientRepository = clientRepository;
         }
-        public void AddClient(Client client)
+        public void Registration(Client client)
         {
-            _clientRepository.AddClient(client);
+            _clientRepository.Registration(client);
+        }
+        public Client LogIn(Client client)
+        {
+            return _clientRepository.LogIn(client);
         }
         public List<Client> GetClients()
         {
