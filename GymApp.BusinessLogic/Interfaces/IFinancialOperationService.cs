@@ -6,7 +6,7 @@ namespace GymApp.BusinessLogic.Interfaces
 {
     public interface IFinancialOperationService
     {
-        void AddFunds(int amount);
-        List<FinancialOperation> GetFinOperations();
+        Task AddFunds(decimal amount, string userName);
+        Task<List<FinancialOperation>> GetFinOperations(string userName);
     }
 }

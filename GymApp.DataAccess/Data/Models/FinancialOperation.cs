@@ -7,7 +7,7 @@ namespace GymApp.DataAccess.Data.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
-        public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public string ClientId { get; set; }
+        public Client? Client { get; set; }
     }
 }

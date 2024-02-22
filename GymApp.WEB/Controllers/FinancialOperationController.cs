@@ -1,5 +1,7 @@
 ﻿using GymApp.BusinessLogic.Interfaces;
+using GymApp.DataAccess.Data.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymApp.WEB.Controllers
@@ -10,15 +12,26 @@ namespace GymApp.WEB.Controllers
     public class FinancialOperationController : ControllerBase
     {
         private readonly IFinancialOperationService _financialOperationService;
-        public FinancialOperationController(IFinancialOperationService financialOperationService)
+        private readonly UserManager<Client> _userManager;
+        private readonly ILogger<FinancialOperationController> _logger;
+        public FinancialOperationController(IFinancialOperationService financialOperationService,
+            UserManager<Client> userManager, ILogger<FinancialOperationController> logger)
         {
             _financialOperationService = financialOperationService;
+            _userManager = userManager;
+            _logger = logger;
         }
         [HttpGet]
-        public IActionResult GetFinOperations()
+        public async Task<IActionResult> GetFinOperations(string userName)
         {
-            _financialOperationService.GetFinOperations();
+            await _financialOperationService.GetFinOperations(User.Identity.Name);
             return Ok();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddFunds(decimal amount)
+        {
+            await _financialOperationService.AddFunds(amount, User.Identity.Name);
+            return Ok("Payment successful");
         }
     }
 }

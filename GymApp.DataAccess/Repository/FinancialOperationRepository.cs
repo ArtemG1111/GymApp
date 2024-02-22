@@ -13,13 +13,14 @@ namespace GymApp.DataAccess.Repository
         {
             _dbContext = dbContext;
         }
-        public List<FinancialOperation> GetFinOperations()
+        public List<FinancialOperation> GetFinOperations(string id)
         {
-            return _dbContext.FinancialOperations.ToList();
+            return _dbContext.FinancialOperations.Where(s => s.ClientId == id).ToList();
         }
-        public void AddFunds(int amount)
+        public void AddFunds(FinancialOperation financialOperation)
         {
-            _dbContext.FinancialOperations.Add();
+            _dbContext.FinancialOperations.Add(financialOperation);
+            _dbContext.SaveChanges();
         }
     }
 }
