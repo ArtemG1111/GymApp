@@ -22,10 +22,10 @@ namespace GymApp.WEB.Controllers
             _logger = logger;
         }
         [HttpGet]
-        public async Task<IActionResult> GetFinOperations(string userName)
+        public async Task<IActionResult> GetFinOperations()
         {
-            await _financialOperationService.GetFinOperations(User.Identity.Name);
-            return Ok();
+            var result = await _financialOperationService.GetFinOperations(User.Identity.Name);
+            return Ok(result);
         }
         [HttpPost]
         public async Task<IActionResult> AddFunds(decimal amount)

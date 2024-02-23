@@ -8,7 +8,7 @@ namespace GymApp.DataAccess.Data.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-        public List<Section> Sections { get; set; }
-        public List<Client> Clients { get; set; }
+        public List<Section> Sections { get; set; } = new();
+        public List<Client> Clients { get; set; } = new();
     }
 }

@@ -3,6 +3,7 @@
 using GymApp.DataAccess.Data;
 using GymApp.DataAccess.Data.Models;
 using GymApp.DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.DataAccess.Repository
 {
@@ -15,7 +16,7 @@ namespace GymApp.DataAccess.Repository
         }
         public List<FinancialOperation> GetFinOperations(string id)
         {
-            return _dbContext.FinancialOperations.Where(s => s.ClientId == id).ToList();
+            return _dbContext.FinancialOperations.Where(s => s.ClientId == id).AsNoTracking().ToList();
         }
         public void AddFunds(FinancialOperation financialOperation)
         {

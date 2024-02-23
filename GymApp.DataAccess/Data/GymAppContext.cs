@@ -14,7 +14,7 @@ namespace GymApp.DataAccess.Data
         public DbSet<FinancialOperation> FinancialOperations { get; set; }
         public GymAppContext(DbContextOptions<GymAppContext> options) : base(options)
         {
-
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

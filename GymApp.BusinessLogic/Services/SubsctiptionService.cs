@@ -1,17 +1,24 @@
 ﻿
 
 using GymApp.BusinessLogic.Interfaces;
+using GymApp.DataAccess.Data;
 using GymApp.DataAccess.Data.Models;
 using GymApp.DataAccess.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace GymApp.BusinessLogic.Services
 {
     public class SubsctiptionService : ISubscriptionService
     {
         private readonly ISubscriptionRepository _subsctiptionRepository;
-        public SubsctiptionService(ISubscriptionRepository subsctiptionRepository)
+        private readonly UserManager<Client> _userManager;
+        private readonly GymAppContext _dbContext;
+        public SubsctiptionService(ISubscriptionRepository subsctiptionRepository, UserManager<Client> userManager,
+            GymAppContext dbContext)
         {
             _subsctiptionRepository = subsctiptionRepository;
+            _userManager = userManager;
+            _dbContext = dbContext;
         }
         public void AddSubscription(Subscription subscription)
         {
@@ -29,9 +36,15 @@ namespace GymApp.BusinessLogic.Services
         {
             _subsctiptionRepository.DeleteSubscription(id);
         }
-        public void AddSectionsToSubscription(int id)
+        public async Task AddClientsToSubscription(int subscriptionId, string userName)
         {
-            _subsctiptionRepository.AddSectionsToSubscription(id);
+            var client = await _userManager.FindByNameAsync(userName);
+
+            var subscription =  _dbContext.Subscriptions.Find(subscriptionId);
+
+            subscription.Clients.Add(client);
+
+            _dbContext.SaveChanges();
         }
     }
 }

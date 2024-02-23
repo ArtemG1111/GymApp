@@ -8,6 +8,7 @@ using GymApp.WEB.Common.Mapping;
 using AutoMapper;
 using GymApp.DataAccess.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DeffaultConnection");
@@ -33,6 +34,7 @@ builder.Services.AddIdentity<Client, IdentityRole>(opts =>
     opts.Password.RequiredLength = 3;
 })
     .AddEntityFrameworkStores<GymAppContext>();
+
 
 var app = builder.Build();
 

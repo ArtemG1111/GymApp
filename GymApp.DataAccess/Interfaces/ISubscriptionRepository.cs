@@ -10,6 +10,5 @@ namespace GymApp.DataAccess.Interfaces
         List<Subscription> GetSubscriptions();
         void UpdateSubscription(Subscription subscription);
         void DeleteSubscription(int id);
-        void AddSectionsToSubscription(int id);
     }
 }

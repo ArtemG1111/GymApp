@@ -1,5 +1,7 @@
-﻿using GymApp.BusinessLogic.Interfaces;
+﻿using AutoMapper;
+using GymApp.BusinessLogic.Interfaces;
 using GymApp.DataAccess.Data.Models;
+using GymApp.WEB.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymApp.WEB.Controllers
@@ -9,21 +11,25 @@ namespace GymApp.WEB.Controllers
     public class SectionController : ControllerBase
     {
         private readonly ISectionService _sectionService;
-        public SectionController(ISectionService sectionService)
+        private readonly IMapper _mapper;
+        public SectionController(ISectionService sectionService, IMapper mapper)
         {
             _sectionService = sectionService;
+            _mapper = mapper;
         }
         [HttpPost]
-        public IActionResult AddSection(Section section)
+        public IActionResult AddSection(SectionViewModel viewSection)
         {
-            _sectionService.AddSection(section);
-            return Ok();
+            var mapResult = _mapper.Map<Section>(viewSection);
+
+            _sectionService.AddSection(mapResult);
+            return Ok("Section was added");
         }
         [HttpGet]
         public IActionResult GetSections()
         {
-            _sectionService.GetSections();
-            return Ok();      
+            var result = _sectionService.GetSections();
+            return Ok(result);      
         }
         [HttpPut]
         public IActionResult UpdateSection(Section section)
@@ -36,6 +42,13 @@ namespace GymApp.WEB.Controllers
         {
             _sectionService.DeleteSection(id);
             return Ok();
+        }
+        [HttpPost("addSectionToSubscription")]
+        public IActionResult AddSectionToSubscription(AddSectionToSubscriptionRequest request)
+        {
+            _sectionService.AddSectionToSubscription(request.SectionId, request.SubscriptionId);
+
+            return Ok("Section was added to Subscription");
         }
     }
 }

@@ -25,7 +25,7 @@ namespace GymApp.DataAccess.Repository
         }
         public void UpdateSubscription(Subscription subscription)
         {
-            _dbContext.Remove(subscription);
+            _dbContext.Attach(subscription);
         }
         public void DeleteSubscription(int id)
         {
@@ -35,10 +35,6 @@ namespace GymApp.DataAccess.Repository
                 throw new Exception($"Subscription with id {id} not found");
             }
             _dbContext.Remove(subscription);
-        }
-        public void AddSectionsToSubscription(int id)
-        {
-            
         }
     }
 }
