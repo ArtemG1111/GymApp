@@ -25,7 +25,7 @@ namespace GymApp.DataAccess.Repository
         }
         public List<Client> GetClients()
         {
-            return _dbContext.Clients.ToList();
+            return _dbContext.Clients.Where(h => h.HasPaidForSubscription).ToList();
         }
         public void UpdateClient(Client client)
         {

@@ -1,9 +1,11 @@
 ﻿
 
 using GymApp.BusinessLogic.Interfaces;
+using GymApp.DataAccess.Data;
 using GymApp.DataAccess.Data.Models;
 using GymApp.DataAccess.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.BusinessLogic.Services
 {
@@ -11,11 +13,13 @@ namespace GymApp.BusinessLogic.Services
     {
         private readonly IFinancialOperationRepository _financialOperationRepository;
         private readonly UserManager<Client> _userManager;
+        private readonly GymAppContext _dbContext;
         public FinancialOperationService(IFinancialOperationRepository financialOperationRepository,
-            UserManager<Client> userManager)
+            UserManager<Client> userManager, GymAppContext dbContext)
         {
             _financialOperationRepository = financialOperationRepository;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
         public async Task<List<FinancialOperation>> GetFinOperations(string userName)
         {
@@ -25,7 +29,10 @@ namespace GymApp.BusinessLogic.Services
         }
         public async Task AddFunds(decimal amount, string userName)
         {
-            var user = await _userManager.FindByNameAsync(userName);
+            //var user = await _userManager.FindByNameAsync(userName);
+
+            var user = _dbContext.Users.Include(s => s.Subscription).FirstOrDefault(u => u.UserName == userName);
+
             var finOperation = new FinancialOperation()
             {
                 Amount = amount,
@@ -33,6 +40,17 @@ namespace GymApp.BusinessLogic.Services
                 ClientId = user.Id
             };
             _financialOperationRepository.AddFunds(finOperation);
+            
+            user.Balance += amount;
+
+            if (!user.HasPaidForSubscription && user.Balance >= user.Subscription.Price)
+            {
+                user.Balance -= user.Subscription.Price;
+
+                user.HasPaidForSubscription = true;
+            }
+
+            _dbContext.SaveChanges();
         }
     }
 }

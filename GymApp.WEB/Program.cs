@@ -9,6 +9,9 @@ using AutoMapper;
 using GymApp.DataAccess.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json.Serialization;
+using GymApp.WEB.Infrastructure.Middleware.ErrorHandling;
+using Hangfire;
+using Hangfire.Storage.SQLite;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DeffaultConnection");
@@ -34,12 +37,15 @@ builder.Services.AddIdentity<Client, IdentityRole>(opts =>
     opts.Password.RequiredLength = 3;
 })
     .AddEntityFrameworkStores<GymAppContext>();
-
+builder.Services.AddHangfire(h => h.UseSQLiteStorage(connectionString));
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
 app.UseDeveloperExceptionPage();
 app.UseRouting();
+
+app.UseHangfireDashboard("/dashboard");
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -50,4 +56,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseToken();
 app.Run();

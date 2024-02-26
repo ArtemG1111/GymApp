@@ -31,6 +31,8 @@ namespace GymApp.WEB.Controllers
         public async Task<IActionResult> AddFunds(decimal amount)
         {
             await _financialOperationService.AddFunds(amount, User.Identity.Name);
+
+
             return Ok("Payment successful");
         }
     }

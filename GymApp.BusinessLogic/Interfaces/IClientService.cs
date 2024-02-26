@@ -11,6 +11,5 @@ namespace GymApp.BusinessLogic.Interfaces
         List<Client> GetClients();
         void UpdateClient(Client client);
         void DeleteClient(int id);
-        
     }
 }

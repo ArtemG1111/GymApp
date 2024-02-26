@@ -33,5 +33,6 @@ namespace GymApp.BusinessLogic.Services
         {
             _clientRepository.DeleteClient(id);
         }
+        
     }
 }
