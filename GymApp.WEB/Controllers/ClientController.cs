@@ -2,6 +2,7 @@
 using GymApp.BusinessLogic.Interfaces;
 using GymApp.DataAccess.Data.Models;
 using GymApp.WEB.ViewModels;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

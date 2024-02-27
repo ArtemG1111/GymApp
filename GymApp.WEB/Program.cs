@@ -57,4 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseToken();
+
+RecurringJob.AddOrUpdate<IClientService>(nameof(IClientService), s => s.ExpiredSubscription(), Cron.Daily);
+
 app.Run();

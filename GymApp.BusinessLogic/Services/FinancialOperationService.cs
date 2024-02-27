@@ -29,7 +29,6 @@ namespace GymApp.BusinessLogic.Services
         }
         public async Task AddFunds(decimal amount, string userName)
         {
-            //var user = await _userManager.FindByNameAsync(userName);
 
             var user = _dbContext.Users.Include(s => s.Subscription).FirstOrDefault(u => u.UserName == userName);
 
@@ -52,5 +51,6 @@ namespace GymApp.BusinessLogic.Services
 
             _dbContext.SaveChanges();
         }
+
     }
 }
