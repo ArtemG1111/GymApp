@@ -60,6 +60,6 @@ if (app.Environment.IsDevelopment())
 app.UseToken();
 
 RecurringJob.AddOrUpdate<IClientService>(nameof(IClientService), s => s.ExpiredSubscription(), Cron.Daily);
-RecurringJob.AddOrUpdate<IEmailService>(nameof(IEmailService), s => s.EmailTest(), Cron.Daily);
+RecurringJob.AddOrUpdate<IEmailService>(nameof(IEmailService), s => s.SendBirthdayEmail(), Cron.Daily);
 
 app.Run();

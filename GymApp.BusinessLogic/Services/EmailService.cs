@@ -14,7 +14,7 @@ namespace GymApp.BusinessLogic.Services
         {
             _dbContext = dbContext;
         }
-        public void EmailTest()
+        public void SendBirthdayEmail()
         {
             var clients = _dbContext.Clients.Where(b => b.BirthDay.Date.Day == DateTime.Now.Date.Day 
             && b.BirthDay.Date.Month == DateTime.Now.Date.Month).ToList();
