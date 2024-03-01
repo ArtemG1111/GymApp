@@ -15,7 +15,7 @@ namespace GymApp.DataAccess.Data
         public GymAppContext(DbContextOptions<GymAppContext> options) : base(options)
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

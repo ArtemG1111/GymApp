@@ -23,6 +23,7 @@ builder.Services.AddTransient<IClientRepository, ClientRepository>()
     .AddTransient<ISectionService, SectionService>()
     .AddTransient<ISubscriptionRepository, SubscriptionRepository>()
     .AddTransient<ISubscriptionService, SubsctiptionService>()
+    .AddTransient<IEmailService, EmailService>()
     .AddDbContext<GymAppContext>(options => options.UseSqlite(connectionString));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -59,5 +60,6 @@ if (app.Environment.IsDevelopment())
 app.UseToken();
 
 RecurringJob.AddOrUpdate<IClientService>(nameof(IClientService), s => s.ExpiredSubscription(), Cron.Daily);
+RecurringJob.AddOrUpdate<IEmailService>(nameof(IEmailService), s => s.EmailTest(), Cron.Daily);
 
 app.Run();

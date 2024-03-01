@@ -8,7 +8,7 @@ namespace GymApp.DataAccess.Data.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string BirthDay { get; set; }
+        public DateTime BirthDay { get; set; }
         public bool HasPaidForSubscription { get; set; }
         public decimal Balance { get; set; }
         public List<FinancialOperation>? FinOperations { get; set; }
